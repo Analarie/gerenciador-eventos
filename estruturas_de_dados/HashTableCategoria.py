@@ -1,6 +1,8 @@
+from funcoes.numeros_primos import gerar_numeros_primos
+
 class HashTableCategoria():
     
-    def __init__(self, tamanho_inicial=10):
+    def __init__(self, tamanho_inicial=11):
         self.chaves = [None] * tamanho_inicial
         self.valores = [None] * tamanho_inicial
 
@@ -14,7 +16,15 @@ class HashTableCategoria():
         if self.fator_carga > 0.65:
             self.dobrar_tamanho()
         
-        pass
+        nome_categoria = categoria.getNome()
+        numeros_primos = gerar_numeros_primos(len(nome_categoria))
+        
+        hash = int()
+
+        for i in range(1, len(nome_categoria)):
+            hash += ( ord(nome_categoria[i-1]) + 1) * numeros_primos[i-1]
+        
+        return hash % self.size()
 
     def existe_categoria(self, categoria):
         pass

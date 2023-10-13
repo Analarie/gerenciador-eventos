@@ -1,6 +1,6 @@
 class HashTableCategoria():
     
-    def __init__(self, tamanho_inicial=10):
+    def __init__(self, tamanho_inicial=11):
         self.chaves = [None] * tamanho_inicial
         self.valores = [None] * tamanho_inicial
 
