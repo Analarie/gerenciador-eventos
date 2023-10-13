@@ -1,4 +1,5 @@
 from estruturas_de_dados.HashTableCategoria import HashTableCategoria
+
 from funcoes.menus import menu_inicial
 
 def main():
@@ -10,7 +11,7 @@ def main():
 
         match(escolha):
             case "inserir_evento":
-                print()
+                
                 print("VOU INSERIR!")
                 break
 

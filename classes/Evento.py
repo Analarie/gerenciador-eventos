@@ -9,3 +9,6 @@ class Evento:
     
     def getCategoria(self):
         return self.categoria
+
+if __name__ == "__main__":
+    pass

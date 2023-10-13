@@ -10,20 +10,18 @@ class HashTableCategoria():
     def size(self):
         return len(self.chaves)
     
-    def hash(self, categoria):
+    def hash(self, evento):
         if self.fator_carga > 0.65:
             self.dobrar_tamanho()
         
-        pass
-
-    def existe_categoria(self, categoria):
+        
         pass
     
-    def inserir_categoria(self, categoria):
+    def inserir_evento(self, evento):
         #self.tamanho += 1
         pass
 
-    def deletar_categoria(self, categoria):
+    def deletar_evento(self, evento):
         #self.tamanho -= 1
         pass
 

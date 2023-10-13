@@ -1,4 +1,5 @@
 def limpar_console():
+
     from os import system
     system("cls")
 
@@ -46,4 +47,26 @@ def menu_inicial():
                     print("Opção inválida, digite um número entre 1 e 5!")
                     print()
                 
-                    
+def menu_inserir_evento(hash_table_categorias):
+    from classes.Evento import Evento
+    from classes.Categoria import Categoria
+
+    nome_evento = input("Digite o nome do evento: ").lower()
+    nome_categoria = input(f"Digite a categoria do evento '{nome_evento}': ").lower()
+    descricao_evento = input(f"Digite a descrição do evento '{nome_evento}': ")
+
+    categoria = Categoria(nome_categoria)
+    evento = Evento(nome_evento, categoria, descricao_evento)
+
+    if hash_table_categorias.existe_categoria(categoria):
+        #tratar essa inserção
+        hash_table_categorias.getCategoria(categoria).inserir_evento(evento)
+    else:
+        #tratar essa inserção
+        hash_table_categorias.inserir_categoria(categoria)
+
+def menu_remover_evento():
+    pass
+
+if __name__ == "__main__":
+    pass
