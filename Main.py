@@ -66,5 +66,57 @@ def test():
 
     print(hash9, hash10, "\n")
 
+def test2():
+    from classes.Categoria import Categoria
+    hashTableCategoria = HashTableCategoria()
+
+    cat1 = Categoria("medicinaa")
+    cat2 = Categoria("computacaoa")
+    cat3 = Categoria("educacaaa")
+
+    hashTableCategoria.inserir_categoria(cat1)
+    hashTableCategoria.inserir_categoria(cat2)
+    hashTableCategoria.inserir_categoria(cat3)
+
+    print(hashTableCategoria.chaves)
+    print(hashTableCategoria.valores)
+
+def test3():
+
+    from classes.Categoria import Categoria
+
+    hashTableCategoria = HashTableCategoria()
+
+    categoria = Categoria("cat")
+    print(hashTableCategoria.hash(categoria))
+
+    categoria2 = Categoria("tac")
+    print(hashTableCategoria.hash(categoria2))
+
+def test4():
+    """
+    Testando a função HashTableCategoria.dobrar_tamanho()
+    """
+
+    from classes.Categoria import Categoria
+    hash_table_categoria = HashTableCategoria()
+
+    cat1 = Categoria("medicinaa")
+    cat2 = Categoria("computacaoa")
+    cat3 = Categoria("educacaaa")
+
+    hash_table_categoria.inserir_categoria(cat1)
+    hash_table_categoria.inserir_categoria(cat2)
+    hash_table_categoria.inserir_categoria(cat3)
+
+    print(hash_table_categoria.chaves, len(hash_table_categoria.chaves))
+    print(hash_table_categoria.valores, len(hash_table_categoria.valores))
+
+    hash_table_categoria.dobrar_tamanho()
+    print()
+
+    print(hash_table_categoria.chaves, len(hash_table_categoria.chaves))
+    print(hash_table_categoria.valores, len(hash_table_categoria.valores))
+
 if __name__ == "__main__":
-    test()
+    main()

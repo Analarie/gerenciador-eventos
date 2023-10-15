@@ -1,19 +1,17 @@
-def gerar_numeros_primos(qtd_numeros):
-    '''
-    Retorna uma lista ordenada com uma quantidade N (qtd_numeros) de números primos.
-    '''
+def eh_primo(numero):
+    comeco = 2
 
-    def eh_primo(numero):
-        if numero % 2==0 and numero != 2:
+    while comeco <= numero**(1/2):
+        if numero % comeco < 1:
             return False
-        elif numero % 3==0 and numero != 3:
-            return False
-        elif numero % 5==0 and numero != 5:
-            return False
-        elif numero % 7==0 and numero != 7:
-            return False
-        else:
-            return True
+        comeco += 1
+
+    return numero > 1
+
+def gerar_numeros_primos(qtd_numeros):
+    """
+    Retorna uma lista ordenada com uma quantidade N (qtd_numeros) de números primos.
+    """
 
     primos = []
     primo = 2
@@ -29,6 +27,30 @@ def gerar_numeros_primos(qtd_numeros):
         primo += 2
 
     return primos
+
+def primo_sucessor(numero):
+    """
+    Recebe um número e retorna o próximo primo maior ou igual a ele.
+    """
+    aux = numero
+
+    while True:
+        if eh_primo(aux):
+            return aux
+        
+        aux += 1
+
+def primo_antecessor(numero):
+    """
+    Recebe um número e retorna o próximo primo menor ou igual a ele.
+    """
+    aux = numero
+
+    while True:
+        if eh_primo(aux):
+            return aux
+        
+        aux -= 1
 
 if __name__ == "__main__":
     pass
