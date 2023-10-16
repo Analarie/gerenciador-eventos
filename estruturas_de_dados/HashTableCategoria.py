@@ -11,6 +11,9 @@ class HashTableCategoria():
         self.tamanho = 0
         self.fator_carga = self.tamanho / self.size()
     
+    def atualiza_fator_carga(self):
+        self.fator_carga = self.tamanho / self.size()
+
     def size(self):
         return len(self.chaves)
     
@@ -35,6 +38,7 @@ class HashTableCategoria():
         """
 
         if self.fator_carga >= 0.7 and self.fator_carga <= 0.8:
+            self.atualiza_fator_carga()
             self.dobrar_tamanho()
         
         indice_insercao = self.hash(categoria)
@@ -45,6 +49,7 @@ class HashTableCategoria():
             self.chaves[indice_insercao] = categoria.getNome()
             self.valores[indice_insercao] = hash_table_para_eventos
             self.tamanho += 1
+            self.atualiza_fator_carga()
         else:
             if self.chaves[indice_insercao] != categoria.getNome():
                 
@@ -56,6 +61,7 @@ class HashTableCategoria():
                         self.chaves[indice_auxiliar] = categoria.getNome()
                         self.valores[indice_auxiliar] = hash_table_para_eventos
                         self.tamanho += 1
+                        self.atualiza_fator_carga()
                         break
 
                     elif self.chaves[indice_auxiliar-2] == None:
@@ -64,6 +70,7 @@ class HashTableCategoria():
                         self.chaves[indice_auxiliar-2] = categoria.getNome()
                         self.valores[indice_auxiliar-2] = hash_table_para_eventos
                         self.tamanho += 1
+                        self.atualiza_fator_carga()
                         break
 
                     else:
@@ -74,14 +81,73 @@ class HashTableCategoria():
 
     def get_valor_categoria(self, categoria):
         if self.existe_categoria(categoria):
+            #continuar codigo
             pass
 
-    def existe_categoria(self, categoria):
-        pass
+    def existe_categoria(self, nome_categoria):
+        """
+        Retorna True caso a categoria exista na HashTable, e False caso não.
+        """
 
+        indice_insercao = self.hash(Categoria(nome_categoria))
+
+        if self.chaves[indice_insercao] == None:
+            return False
+        elif self.chaves[indice_insercao] == nome_categoria:
+            return True
+        else:
+            if indice_insercao >= len(self.chaves)/2:
+                for i in range(indice_insercao + 1, len(self.chaves)):
+                    if self.chaves[i] == nome_categoria:
+                        return True
+            else:
+                for i in range(indice_insercao):
+                    if self.chaves[i] == nome_categoria:
+                        return True
+        return False
+    
     def remover_categoria(self, nome_categoria):
-        #self.tamanho -= 1
-        pass
+        """
+        Dado um nome de categoria, remove a categoria da HashTable caso ela esteja armazenada.
+        """
+
+        categoria_removida = False
+
+        indice_insercao = self.hash(Categoria(nome_categoria))
+
+        if self.chaves[indice_insercao] == None:
+            print("A categoria informada não existe na tabela hash.")
+            categoria_removida = True
+        
+        elif self.chaves[indice_insercao] == nome_categoria:
+            self.chaves[indice_insercao] = None
+            self.valores[indice_insercao] = None
+            self.tamanho -= 1
+            self.atualiza_fator_carga()
+            categoria_removida = True
+        
+        else:
+            if indice_insercao >= len(self.chaves)/2:
+                for i in range(indice_insercao + 1, len(self.chaves)):
+                    if self.chaves[i] == nome_categoria:
+                        self.chaves[i] = None
+                        self.valores[i] = None
+                        self.tamanho -= 1
+                        self.atualiza_fator_carga()
+                        categoria_removida = True
+                        break
+            else:
+                for i in range(indice_insercao):
+                    if self.chaves[i] == nome_categoria:
+                        self.chaves[i] = None
+                        self.valores[i] = None
+                        self.tamanho -= 1
+                        self.atualiza_fator_carga()
+                        categoria_removida = True
+                        break
+        
+        if not categoria_removida:
+            print("A categoria informada não existe na tabela hash.")
 
     def dobrar_tamanho(self):
         """
