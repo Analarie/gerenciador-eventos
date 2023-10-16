@@ -68,7 +68,7 @@ def menu_inicial():
                 case 2:
                     return "remover_evento"
                 case 3:
-                    return "buscar_categoria"
+                    return "buscar_evento"
                 case 4:
                     return "listar_categorias"
                 case 5:
@@ -80,22 +80,27 @@ def menu_inicial():
                     print()
                 
 def menu_inserir_evento(hash_table_categorias):
-    from classes.Evento import Evento
-    from classes.Categoria import Categoria
 
     nome_evento = input("Digite o nome do evento: ").lower()
     nome_categoria = input(f"Digite a categoria do evento '{nome_evento}': ").lower()
+
+    eventos_categoria = hash_table_categorias.get_valor_categoria(nome_categoria)
+
+    if eventos_categoria:
+        pass
+    
+    #1 - conferir se a categoria existe
+        #1.1 - se sim: conferir se o evento ja existe
+            #1.1.1 se sim: "evento para categoria ja existe"
+            #1.1.2 se nao: criar evento e adicionar à categoria
+        #1.2 - se nao: criar categoria
+            #1.2.1 adiciono categoria
+        #1.3 - criar evento
+        #1.4 - 
+    
+    nome_evento = input("Digite o nome do evento: ").lower()
+    nome_categoria = input(f"Digite a categoria do evento '{nome_evento}': ").lower()
     descricao_evento = input(f"Digite a descrição do evento '{nome_evento}': ")
-
-    categoria = Categoria(nome_categoria)
-    evento = Evento(nome_evento, categoria, descricao_evento)
-
-    if hash_table_categorias.existe_categoria(categoria):
-        #tratar essa inserção
-        hash_table_categorias.getCategoria(categoria).inserir_evento(evento)
-    else:
-        #tratar essa inserção
-        hash_table_categorias.inserir_categoria(categoria)
 
 def menu_remover_evento():
     pass

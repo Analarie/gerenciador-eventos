@@ -38,7 +38,6 @@ class HashTableCategoria():
         """
 
         if self.fator_carga >= 0.7 and self.fator_carga <= 0.8:
-            self.atualiza_fator_carga()
             self.dobrar_tamanho()
         
         indice_insercao = self.hash(categoria)
@@ -79,10 +78,38 @@ class HashTableCategoria():
                         else:
                             indice_auxiliar += 1
 
-    def get_valor_categoria(self, categoria):
-        if self.existe_categoria(categoria):
-            #continuar codigo
-            pass
+    def get_valor_categoria(self, nome_categoria):
+        """
+        Retorna o valor (hash table de eventos) de uma categoria caso ela esteja armazenada.
+        
+        Caso a categoria não exista na tabela, retorna False.
+        """
+        
+        indice_insercao = self.hash(Categoria(nome_categoria))
+
+        if self.chaves[indice_insercao] == None:
+            return False
+        elif self.chaves[indice_insercao] == nome_categoria:
+            return self.valores[indice_insercao]
+        else:
+            if indice_insercao >= len(self.chaves)//2:
+                for i in range(indice_insercao + 1, len(self.chaves)):
+                    if self.chaves[i] == nome_categoria:
+                        return self.valores[indice_insercao]
+                    
+                for i in range(indice_insercao):
+                    if self.chaves[i] == nome_categoria:
+                        return self.valores[indice_insercao]
+            else:
+                for i in range(indice_insercao):
+                    if self.chaves[i] == nome_categoria:
+                        return self.valores[indice_insercao]
+                
+                for i in range(indice_insercao + 1, len(self.chaves)):
+                    if self.chaves[i] == nome_categoria:
+                        return self.valores[indice_insercao]
+
+        return False
 
     def listar_categorias(self):
         """
@@ -109,19 +136,27 @@ class HashTableCategoria():
         elif self.chaves[indice_insercao] == nome_categoria:
             return True
         else:
-            if indice_insercao >= len(self.chaves)/2:
+            if indice_insercao >= len(self.chaves)//2:
                 for i in range(indice_insercao + 1, len(self.chaves)):
+                    if self.chaves[i] == nome_categoria:
+                        return True
+                    
+                for i in range(indice_insercao):
                     if self.chaves[i] == nome_categoria:
                         return True
             else:
                 for i in range(indice_insercao):
                     if self.chaves[i] == nome_categoria:
                         return True
+                    
+                for i in range(indice_insercao + 1, len(self.chaves)):
+                    if self.chaves[i] == nome_categoria:
+                        return True
         return False
     
     def remover_categoria(self, nome_categoria):
         """
-        Dado um nome de categoria, remove a categoria da HashTable caso ela esteja armazenada.
+        Dado um nome de categoria, remove a categoria da HashTable caso ela esteja armazenada e retorna seu nome.
         """
 
         categoria_removida = False
@@ -137,18 +172,26 @@ class HashTableCategoria():
             self.valores[indice_insercao] = None
             self.tamanho -= 1
             self.atualiza_fator_carga()
-            categoria_removida = True
+            return nome_categoria
         
         else:
-            if indice_insercao >= len(self.chaves)/2:
+            if indice_insercao >= len(self.chaves)//2:
                 for i in range(indice_insercao + 1, len(self.chaves)):
                     if self.chaves[i] == nome_categoria:
                         self.chaves[i] = None
                         self.valores[i] = None
                         self.tamanho -= 1
                         self.atualiza_fator_carga()
-                        categoria_removida = True
-                        break
+                        return nome_categoria
+                    
+                for i in range(indice_insercao):
+                    if self.chaves[i] == nome_categoria:
+                        self.chaves[i] = None
+                        self.valores[i] = None
+                        self.tamanho -= 1
+                        self.atualiza_fator_carga()
+                        return nome_categoria
+                    
             else:
                 for i in range(indice_insercao):
                     if self.chaves[i] == nome_categoria:
@@ -156,8 +199,15 @@ class HashTableCategoria():
                         self.valores[i] = None
                         self.tamanho -= 1
                         self.atualiza_fator_carga()
-                        categoria_removida = True
-                        break
+                        return nome_categoria
+                
+                for i in range(indice_insercao + 1, len(self.chaves)):
+                    if self.chaves[i] == nome_categoria:
+                        self.chaves[i] = None
+                        self.valores[i] = None
+                        self.tamanho -= 1
+                        self.atualiza_fator_carga()
+                        return nome_categoria
         
         if not categoria_removida:
             print("A categoria informada não existe na tabela hash.")
@@ -217,6 +267,8 @@ class HashTableCategoria():
                                 indice_auxiliar = 0
                             else:
                                 indice_auxiliar += 1
+                                
+        self.atualiza_fator_carga()
 
 if __name__ == "__main__":
     pass

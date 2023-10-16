@@ -21,7 +21,7 @@ def main():
                 print("VOU REMOVER!")
                 break
 
-            case "buscar_categoria":
+            case "buscar_evento":
                 print()
                 print("VOU BUSCAR!")
                 break
