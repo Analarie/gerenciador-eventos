@@ -57,12 +57,14 @@ def test():
     print(hash5, hash6, "\n")
 
     hash7 = categorias.hash(Categoria("sociologia"))
-    hash8 = categorias.hash(Categoria("matemática"))
-
+    hash8 = categorias.hash(Categoria("aociologis"))
+    if hash7 == hash8:
+         
+        print(categorias.hash(Categoria("sociologia"))%9) 
     print(hash7, hash8, "\n")
 
     hash9 = categorias.hash(Categoria("administracao"))
-    hash10 = categorias.hash(Categoria("medicina"))
+    hash10 = categorias.hash(Categoria("sociologia"))
 
     print(hash9, hash10, "\n")
 

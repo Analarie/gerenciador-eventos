@@ -26,8 +26,20 @@ class HashTableCategoria():
         
         return hash % self.size()
 
-    def existe_categoria(self, categoria):
-        pass
+    def hash_existente(self, hash):
+
+        for i in range (hash, len(self.chaves)-1):
+
+            if self.chaves[i] == None:
+                return i
+            else:
+                for i in range (0, hash):
+                    if self.chaves[i] == None:
+                        return i
+                    
+                
+                
+          
     
     def inserir_categoria(self, categoria):
         #self.tamanho += 1
@@ -40,6 +52,10 @@ class HashTableCategoria():
     def dobrar_tamanho(self):
         self.chaves += [None] * self.size()
         self.valores += [None] * self.size()
+
+    def inserir_Categoria(self):
+
+       pass
 
 if __name__ == "__main__":
     pass

@@ -32,9 +32,9 @@ def menu_inicial():
         else:
             match (escolha):
                 case 1:
-                    return "inserir_evento"
+                    return menu_inserir_evento()
                 case 2:
-                    return "remover_evento"
+                    return menu_remover_evento()
                 case 3:
                     return "buscar_categoria"
                 case 4:
