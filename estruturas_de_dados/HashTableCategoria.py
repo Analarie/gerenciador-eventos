@@ -84,6 +84,19 @@ class HashTableCategoria():
             #continuar codigo
             pass
 
+    def listar_categorias(self):
+        """
+        Retorna uma string coom o nome de todas as categorias armazenadas na HashTable.
+        """
+
+        categorias_armazendas = "Categorias armazendas: "
+        for categoria in self.chaves:
+            if categoria != None:
+                categorias_armazendas += categoria
+                categorias_armazendas += ", "
+        
+        return categorias_armazendas[:-2]
+    
     def existe_categoria(self, nome_categoria):
         """
         Retorna True caso a categoria exista na HashTable, e False caso não.

@@ -16,6 +16,38 @@ def mensagem_menu_inicial():
     print("========================================")
     print()
 
+def mensagem_menu_retorno():
+    print()
+    print("1 - VOLTAR")
+    print("2 - SAIR")
+    print()
+
+def mensagem_programa_encerrado():
+    print()
+    print("PROGRAMA ENCERRADO!")
+    
+def menu_retorno():
+    mensagem_menu_retorno()
+
+    while True:
+        try:
+            escolha = int(input("> "))
+
+        except ValueError:
+            print("Opção inválida, digite um número entre 1 e 5!")
+            print()
+
+        else:
+            match (escolha):
+                case 1:
+                    limpar_console()
+                    return True
+                case 2:
+                    return False
+                case _:
+                    print("Opção inválida, digite um número entre 1 e 5!")
+                    print()
+
 def menu_inicial():
 
     mensagem_menu_inicial()
