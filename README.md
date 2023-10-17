@@ -29,3 +29,9 @@ Criar um sistema que permita o gerenciamento de eventos organizados por categori
 * Operação de Listagem de Categorias: Percorra a tabela hash e liste todas as categorias disponíveis. 
 
 * Redimensionamento da tabela hash: quando o fator de carga da tabela hash hash estiver entre 0,7 e 0,8, realize o redimensionamento da tabela que envolve aumentar o tamanho da tabela hash para um novo tamanho apropriado ( número primo próximo ao dobro do tamanho original) e todos os elementos precisam ser rehashing e inseridos na nova tabela.
+
+## Solução de Armazenamento Adotada
+
+<br>
+
+![](solucao-armazenamento-adotada.png)
