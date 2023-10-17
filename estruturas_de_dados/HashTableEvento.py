@@ -1,7 +1,11 @@
 from funcoes.numeros_primos import primo_antecessor, primo_sucessor, gerar_numeros_primos
 from classes.Evento import Evento
 
-class HashTableEvento():
+class Tipo(type):
+    def __repr__(self):
+        return self.__name__
+
+class HashTableEvento(metaclass = Tipo):
     
     def __init__(self, tamanho_inicial=11):
         self.chaves = [None] * tamanho_inicial
@@ -33,7 +37,7 @@ class HashTableEvento():
 
     def inserir_evento(self, evento):
         """
-        Insere nome da categoria como chave e uma HashTableEvento como valor em uma instância de HashTableCategoria, caso a categoria não exista na hash table.
+        Dada uma instância de Evento insere o nome do evento como chave da hash table e a instância de Evento como valor, caso o evento não exista na hash table.
         """
 
         if self.fator_carga >= 0.7 and self.fator_carga <= 0.8:
@@ -53,19 +57,17 @@ class HashTableEvento():
                 indice_auxiliar = indice_insercao + 1
                 while True:
                     if self.chaves[indice_auxiliar] == None:
-                        hash_table_para_eventos = HashTableEvento()
 
                         self.chaves[indice_auxiliar] = evento.getNome()
-                        self.valores[indice_auxiliar] = hash_table_para_eventos
+                        self.valores[indice_auxiliar] = evento
                         self.tamanho += 1
                         self.atualiza_fator_carga()
                         break
 
                     elif self.chaves[indice_auxiliar-2] == None:
-                        hash_table_para_eventos = HashTableEvento()
 
                         self.chaves[indice_auxiliar-2] = evento.getNome()
-                        self.valores[indice_auxiliar-2] = hash_table_para_eventos
+                        self.valores[indice_auxiliar-2] = evento
                         self.tamanho += 1
                         self.atualiza_fator_carga()
                         break
@@ -75,6 +77,57 @@ class HashTableEvento():
                             indice_auxiliar = 0
                         else:
                             indice_auxiliar += 1
+
+    def existe_evento(self, nome_evento):
+            """
+            Retorna True caso o evento exista na HashTable, e False caso não.
+            """
+
+            indice_insercao = self.hash(Evento(nome_evento, "", ""))
+
+            if self.chaves[indice_insercao] == None:
+                return False
+            elif self.chaves[indice_insercao] == nome_evento:
+                return True
+            else:
+                if indice_insercao >= len(self.chaves)//2:
+                    for i in range(indice_insercao + 1, len(self.chaves)):
+                        if self.chaves[i] == nome_evento:
+                            return True
+                        
+                    for i in range(indice_insercao):
+                        if self.chaves[i] == nome_evento:
+                            return True
+                else:
+                    for i in range(indice_insercao):
+                        if self.chaves[i] == nome_evento:
+                            return True
+                        
+                    for i in range(indice_insercao + 1, len(self.chaves)):
+                        if self.chaves[i] == nome_evento:
+                            return True
+            return False
+
+    def listar_eventos(self):
+        """
+        Retorna uma string coom o nome de todos os eventos armazenadas na HashTable.
+        
+        Retorna "Nenhum evento armazenado." caso não existam eventos na tabela.
+        """
+
+        if self.tamanho == 0:
+            return "Nenhum evento armazenado."
+
+        eventos_armazenados = "Eventos armazenados: "
+        for evento in self.chaves:
+            if evento != None:
+                eventos_armazenados += evento
+                eventos_armazenados += ", "
+        
+        return eventos_armazenados[:-2]
+
+    def imprimir_dados_eventos(self):
+        pass
 
     def dobrar_tamanho(self):
         """

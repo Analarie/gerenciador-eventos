@@ -2,7 +2,11 @@ from funcoes.numeros_primos import primo_antecessor, primo_sucessor, gerar_numer
 from estruturas_de_dados.HashTableEvento import HashTableEvento
 from classes.Categoria import Categoria
 
-class HashTableCategoria():
+class Tipo(type):
+    def __repr__(self):
+        return self.__name__
+
+class HashTableCategoria(metaclass = Tipo):
     
     def __init__(self, tamanho_inicial=11):
         self.chaves = [None] * tamanho_inicial
@@ -78,7 +82,7 @@ class HashTableCategoria():
                         else:
                             indice_auxiliar += 1
 
-    def get_valor_categoria(self, nome_categoria):
+    def get_eventos_categoria(self, nome_categoria):
         """
         Retorna o valor (hash table de eventos) de uma categoria caso ela esteja armazenada.
         
@@ -113,9 +117,14 @@ class HashTableCategoria():
 
     def listar_categorias(self):
         """
-        Retorna uma string coom o nome de todas as categorias armazenadas na HashTable.
+        Retorna uma string com o nome de todas as categorias armazenadas na HashTable.
+
+        Retorna "Nenhuma categoria armazenada." caso não existam categorias na tabela.
         """
 
+        if self.tamanho == 0:
+            return "Nenhuma categoria armazenada."
+        
         categorias_armazendas = "Categorias armazendas: "
         for categoria in self.chaves:
             if categoria != None:

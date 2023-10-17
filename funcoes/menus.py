@@ -18,7 +18,7 @@ def mensagem_menu_inicial():
 
 def mensagem_menu_retorno():
     print()
-    print("1 - VOLTAR")
+    print("1 - VOLTAR AO MENU")
     print("2 - SAIR")
     print()
 
@@ -34,7 +34,7 @@ def menu_retorno():
             escolha = int(input("> "))
 
         except ValueError:
-            print("Opção inválida, digite um número entre 1 e 5!")
+            print("Opção inválida, escolha 1 ou 2!")
             print()
 
         else:
@@ -45,7 +45,7 @@ def menu_retorno():
                 case 2:
                     return False
                 case _:
-                    print("Opção inválida, digite um número entre 1 e 5!")
+                    print("Opção inválida, escolha 1 ou 2!")
                     print()
 
 def menu_inicial():
@@ -80,27 +80,38 @@ def menu_inicial():
                     print()
                 
 def menu_inserir_evento(hash_table_categorias):
+    from classes.Evento import Evento
+    from classes.Categoria import Categoria
 
     nome_evento = input("Digite o nome do evento: ").lower()
     nome_categoria = input(f"Digite a categoria do evento '{nome_evento}': ").lower()
 
-    eventos_categoria = hash_table_categorias.get_valor_categoria(nome_categoria)
+    eventos_categoria = hash_table_categorias.get_eventos_categoria(nome_categoria)
 
     if eventos_categoria:
-        pass
-    
-    #1 - conferir se a categoria existe
-        #1.1 - se sim: conferir se o evento ja existe
-            #1.1.1 se sim: "evento para categoria ja existe"
-            #1.1.2 se nao: criar evento e adicionar à categoria
-        #1.2 - se nao: criar categoria
-            #1.2.1 adiciono categoria
-        #1.3 - criar evento
-        #1.4 - 
-    
-    nome_evento = input("Digite o nome do evento: ").lower()
-    nome_categoria = input(f"Digite a categoria do evento '{nome_evento}': ").lower()
-    descricao_evento = input(f"Digite a descrição do evento '{nome_evento}': ")
+        if eventos_categoria.existe_evento(nome_evento):
+            print()
+            print(f"O evento '{nome_evento}' já existe para a categoria '{nome_categoria}'.")
+            print()
+        else:
+            descricao_evento = input(f"Digite a descrição do evento '{nome_evento}': ")
+            evento = Evento(nome_evento, nome_categoria, descricao_evento)
+
+            hash_table_categorias.get_eventos_categoria(nome_categoria).inserir_evento(evento)
+            print()
+            print(f"Evento '{nome_evento}' inserido com sucesso.")
+            print()
+    else:
+        categoria = Categoria(nome_categoria)
+        hash_table_categorias.inserir_categoria(categoria)
+
+        descricao_evento = input(f"Digite a descrição do evento '{nome_evento}': ")
+        evento = Evento(nome_evento, nome_categoria, descricao_evento)
+
+        hash_table_categorias.get_eventos_categoria(categoria.getNome()).inserir_evento(evento)
+        print()
+        print(f"Evento '{nome_evento}' inserido com sucesso.")
+        print()
 
 def menu_remover_evento():
     pass

@@ -1,7 +1,12 @@
 from estruturas_de_dados.HashTableCategoria import HashTableCategoria
 
-from funcoes.menus import limpar_console, menu_inicial, menu_retorno, mensagem_programa_encerrado
-from funcoes.testes import *
+from funcoes.menus import limpar_console
+from funcoes.menus import menu_inicial
+from funcoes.menus import menu_retorno
+from funcoes.menus import mensagem_programa_encerrado
+from funcoes.menus import menu_inserir_evento
+
+#from funcoes.testes import *
 
 def main():
 
@@ -11,10 +16,14 @@ def main():
         escolha = menu_inicial()
 
         match(escolha):
+
             case "inserir_evento":
+                limpar_console()
+                menu_inserir_evento(categorias)
                 
-                print("VOU INSERIR!")
-                break
+                if not menu_retorno():
+                    mensagem_programa_encerrado()
+                    break
 
             case "remover_evento":
                 print()
