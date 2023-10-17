@@ -5,6 +5,7 @@ from funcoes.menus import menu_inicial
 from funcoes.menus import menu_retorno
 from funcoes.menus import mensagem_programa_encerrado
 from funcoes.menus import menu_inserir_evento
+from funcoes.menus import menu_remover_evento
 
 #from funcoes.testes import *
 
@@ -26,9 +27,12 @@ def main():
                     break
 
             case "remover_evento":
-                print()
-                print("VOU REMOVER!")
-                break
+                limpar_console()
+                menu_remover_evento(categorias)
+                
+                if not menu_retorno():
+                    mensagem_programa_encerrado()
+                    break
 
             case "buscar_evento":
                 print()

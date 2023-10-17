@@ -80,6 +80,12 @@ def menu_inicial():
                     print()
                 
 def menu_inserir_evento(hash_table_categorias):
+    """
+    Cria e insere um novo evento para uma categoria especificada em uma dada hash table com categorias de eventos.
+     
+    Apenas insere se o evento criado ainda não existir para a categoria especificada.
+    """
+    
     from classes.Evento import Evento
     from classes.Categoria import Categoria
 
@@ -113,8 +119,29 @@ def menu_inserir_evento(hash_table_categorias):
         print(f"Evento '{nome_evento}' inserido com sucesso.")
         print()
 
-def menu_remover_evento():
-    pass
+def menu_remover_evento(hash_table_categorias):
+    """
+    Remove um evento de uma categoria especificada em uma dada hash table com categorias de eventos.
+     
+    Apenas remove se o evento existir para a categoria especificada, caso não, retorna:
+    
+    "O evento '{nome_evento}' não existe na tabela hash.".
+    """
+    
+    nome_categoria = input(f"Digite a categoria do evento que deseja remover: ").lower() 
+
+    if hash_table_categorias.get_eventos_categoria(nome_categoria):
+        nome_evento = input("Digite o nome do evento que deseja remover: ").lower()
+        
+        if hash_table_categorias.get_eventos_categoria(nome_categoria).remover_evento(nome_evento) == nome_evento:
+            print()
+            print(f"Evento '{nome_evento}' removido com sucesso.")
+            print()
+    
+    else:
+        print()
+        print(f"A categoria '{nome_categoria}' não está armazenada.")
+        print()
 
 if __name__ == "__main__":
     pass

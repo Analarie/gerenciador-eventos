@@ -173,7 +173,7 @@ class HashTableCategoria(metaclass = Tipo):
         indice_insercao = self.hash(Categoria(nome_categoria))
 
         if self.chaves[indice_insercao] == None:
-            print("A categoria informada não existe na tabela hash.")
+            print(f"A categoria '{nome_categoria}' não existe na tabela hash.")
             categoria_removida = True
         
         elif self.chaves[indice_insercao] == nome_categoria:
@@ -219,7 +219,7 @@ class HashTableCategoria(metaclass = Tipo):
                         return nome_categoria
         
         if not categoria_removida:
-            print("A categoria informada não existe na tabela hash.")
+            print(f"A categoria '{nome_categoria}' não existe na tabela hash.")
 
     def dobrar_tamanho(self):
         """

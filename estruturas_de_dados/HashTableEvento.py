@@ -108,6 +108,66 @@ class HashTableEvento(metaclass = Tipo):
                             return True
             return False
 
+    def remover_evento(self, nome_evento):
+        """
+        Dado um nome de evento, remove o evento da HashTable caso ele esteja armazenado e retorna seu nome.
+        """
+
+        evento_removido = False
+
+        indice_insercao = self.hash(Evento(nome_evento, "", ""))
+
+        if self.chaves[indice_insercao] == None:
+            print()
+            print(f"O evento '{nome_evento}' não existe na tabela hash.")
+            
+            evento_removido = True
+        
+        elif self.chaves[indice_insercao] == nome_evento:
+            self.chaves[indice_insercao] = None
+            self.valores[indice_insercao] = None
+            self.tamanho -= 1
+            self.atualiza_fator_carga()
+            return nome_evento
+        
+        else:
+            if indice_insercao >= len(self.chaves)//2:
+                for i in range(indice_insercao + 1, len(self.chaves)):
+                    if self.chaves[i] == nome_evento:
+                        self.chaves[i] = None
+                        self.valores[i] = None
+                        self.tamanho -= 1
+                        self.atualiza_fator_carga()
+                        return nome_evento
+                    
+                for i in range(indice_insercao):
+                    if self.chaves[i] == nome_evento:
+                        self.chaves[i] = None
+                        self.valores[i] = None
+                        self.tamanho -= 1
+                        self.atualiza_fator_carga()
+                        return nome_evento
+                    
+            else:
+                for i in range(indice_insercao):
+                    if self.chaves[i] == nome_evento:
+                        self.chaves[i] = None
+                        self.valores[i] = None
+                        self.tamanho -= 1
+                        self.atualiza_fator_carga()
+                        return nome_evento
+                
+                for i in range(indice_insercao + 1, len(self.chaves)):
+                    if self.chaves[i] == nome_evento:
+                        self.chaves[i] = None
+                        self.valores[i] = None
+                        self.tamanho -= 1
+                        self.atualiza_fator_carga()
+                        return nome_evento
+        
+        if not evento_removido:
+            print(f"O evento '{nome_evento}' não existe na tabela hash.")
+
     def listar_eventos(self):
         """
         Retorna uma string coom o nome de todos os eventos armazenadas na HashTable.
