@@ -17,6 +17,9 @@ class HashTableEvento(metaclass = Tipo):
     def atualiza_fator_carga(self):
         self.fator_carga = self.tamanho / self.size()    
 
+    def getTamanho(self):
+        return self.tamanho
+
     def size(self):
         return len(self.chaves)
     
@@ -187,7 +190,24 @@ class HashTableEvento(metaclass = Tipo):
         return eventos_armazenados[:-2]
 
     def imprimir_dados_eventos(self):
-        pass
+        """
+        Imprime todos os eventos e seus dados armazenados na tabela hash.
+        """
+        
+        count = int()
+
+        for evento in self.valores:
+            if evento != None:
+                print()
+                print(f"Evento: {evento.getNome()}")
+                print(f"Categoria: {evento.getCategoria()}")
+                print(f"Descrição: {evento.getDescricao()}")
+                print()
+
+                count += 1
+
+                if count == self.getTamanho():
+                    break
 
     def dobrar_tamanho(self):
         """

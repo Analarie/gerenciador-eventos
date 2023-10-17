@@ -6,6 +6,7 @@ from funcoes.menus import menu_retorno
 from funcoes.menus import mensagem_programa_encerrado
 from funcoes.menus import menu_inserir_evento
 from funcoes.menus import menu_remover_evento
+from funcoes.menus import menu_buscar_evento
 
 #from funcoes.testes import *
 
@@ -35,9 +36,12 @@ def main():
                     break
 
             case "buscar_evento":
-                print()
-                print("VOU BUSCAR!")
-                break
+                limpar_console()
+                menu_buscar_evento(categorias)
+                
+                if not menu_retorno():
+                    mensagem_programa_encerrado()
+                    break
 
             case "listar_categorias":
                 limpar_console()
@@ -48,6 +52,7 @@ def main():
                     break
 
             case "sair":
+                print()
                 mensagem_programa_encerrado()
                 break
 

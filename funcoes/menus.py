@@ -23,8 +23,13 @@ def mensagem_menu_retorno():
     print()
 
 def mensagem_programa_encerrado():
-    print()
-    print("PROGRAMA ENCERRADO!")
+    print("*************************")
+    print("*************************")
+    print("**                     **")
+    print("** PROGRAMA ENCERRADO! **")
+    print("**                     **")
+    print("*************************")
+    print("*************************")
     
 def menu_retorno():
     mensagem_menu_retorno()
@@ -137,10 +142,39 @@ def menu_remover_evento(hash_table_categorias):
             print()
             print(f"Evento '{nome_evento}' removido com sucesso.")
             print()
+
+            #remove categoria caso ela nao tenha mais eventos cadastrados
+            if hash_table_categorias.get_eventos_categoria(nome_categoria).getTamanho() == 0:
+                hash_table_categorias.remover_categoria(nome_categoria)
     
     else:
         print()
         print(f"A categoria '{nome_categoria}' não está armazenada.")
+        print()
+
+def menu_buscar_evento(hash_table_categorias):
+    """
+    Dada uma hash table de categorias, lista todos os eventos de uma categoria caso a categoria esteja armazenada na hash table e por tanto possua eventos - categorias sem eventos cadastrados são excluídas da hash table de categorias.
+
+    Caso a categoria não esteja armazenada retorna:
+
+    "Não existem eventos armazenados para essa categoria."
+    """
+
+    nome_categoria = input(f"Digite a categoria de eventos: ").lower()
+    eventos_categoria = hash_table_categorias.get_eventos_categoria(nome_categoria)
+    
+    if eventos_categoria:
+        print()
+        print(f"======== EVENTOS DA CATEGORIA '{nome_categoria.upper()}' ========")
+        
+        eventos_categoria.imprimir_dados_eventos()
+
+        print("=" * ( 41+len(nome_categoria) ) )
+        print()
+    else:
+        print()
+        print(f"Não existem eventos armazenados para a categoria '{nome_categoria}'.")
         print()
 
 if __name__ == "__main__":
