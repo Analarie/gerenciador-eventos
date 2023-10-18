@@ -1,5 +1,8 @@
 def limpar_console():
-
+    """
+    Limpa o PowerShell ou prompt de comando (on Microsoft Windows).
+    """
+    
     from os import system
     system("cls")
 
@@ -17,12 +20,14 @@ def mensagem_menu_inicial():
     print()
 
 def mensagem_menu_retorno():
+
     print()
     print("1 - VOLTAR AO MENU")
     print("2 - SAIR")
     print()
 
 def mensagem_programa_encerrado():
+
     print("*************************")
     print("*************************")
     print("**                     **")
@@ -32,6 +37,7 @@ def mensagem_programa_encerrado():
     print("*************************")
     
 def menu_retorno():
+    
     mensagem_menu_retorno()
 
     while True:

@@ -8,8 +8,6 @@ from funcoes.menus import menu_inserir_evento
 from funcoes.menus import menu_remover_evento
 from funcoes.menus import menu_buscar_evento
 
-#from funcoes.testes import *
-
 def main():
 
     categorias = HashTableCategoria()
